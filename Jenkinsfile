@@ -15,7 +15,7 @@ pipeline {
       steps {
         sh 'npm install'
          sh '''#!/bin/sh
-             pm2 restart all'''
+             sudo pm2 restart all'''
       }
     }
 
