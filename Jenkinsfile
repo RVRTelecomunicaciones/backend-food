@@ -14,14 +14,15 @@ pipeline {
     stage('Build') {
       steps {
         sh 'npm install'
-         sh 'npm run start:dev'
+         sh 'pm2 restart all '
+         sh 'pm2 start main.js'
       }
     }
 
 
     stage('Test') {
       steps {
-        sh 'node test'
+        echo 'Testing..'
       }
     }
   }
