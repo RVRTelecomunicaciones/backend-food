@@ -14,7 +14,7 @@ pipeline {
     stage('Build') {
       steps {
         sh 'npm install'
-         sh 'pm2 restart all'
+         sh 'sudo pm2 restart all'
       }
     }
 
