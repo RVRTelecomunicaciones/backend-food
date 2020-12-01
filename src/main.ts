@@ -17,7 +17,11 @@ async function bootstrap() {
       'Apache License, Version 2.0',
       'https://www.apache.org/licenses/LICENSE-2.0',
     )
-    .setContact('RUSSELL V.', 'https://jonah.pw', 'russellvergara@hotmail.com')
+    .setContact(
+      'RUSSELL V',
+      'www.rvrtelecomunicaciones.com',
+      'russellvergara@hotmail.com',
+    )
     .addBearerAuth({
       bearerFormat: 'token',
       type: 'http',

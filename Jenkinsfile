@@ -14,15 +14,19 @@ pipeline {
     stage('Build') {
       steps {
         sh 'npm install'
-         sh 'sudo pm2 restart all'
+        sh 'npm run build'
       }
     }
-
-
     stage('Test') {
       steps {
-        echo 'Testing..'
+        sh 'sudo pm2 start main.js'
       }
     }
+    stage('Deploy') {
+      steps {
+        sh 'sudo pm2 restart all'
+      }
+    }
+    
   }
 }
