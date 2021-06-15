@@ -28,6 +28,20 @@ export class ConfigdbService {
         DB_USERNAME: process.env.DB_USERNAME,
         DB_PASSWORD: process.env.DB_PASSWORD,
         JWT_SECRET: process.env.JWT_SECRET,
+
+        //SEND EMAIL USE OAUTH2
+        EMAIL_AUTH_TYPE: process.env.EMAIL_AUTH_TYPE,
+        EMAIL_SERVICE: process.env.EMAIL_SERVICE,
+        EMAIL_HOST: process.env.EMAIL_HOST,
+        EMAIL_PORT: process.env.EMAIL_PORT,
+        EMAIL_SECURE: process.env.EMAIL_SECURE,
+        EMAIL_ALIAS: process.env.EMAIL_ALIAS,
+        EMAIL_USERNAME: process.env.EMAIL_USERNAME,
+        EMAIL_CLIENT_ID: process.env.EMAIL_CLIENT_ID,
+        EMAIL_CLIENT_SECRET: process.env.EMAIL_CLIENT_SECRET,
+        EMAIL_REFRESH_TOKEN: process.env.EMAIL_REFRESH_TOKEN,
+        EMAIL_ACCESS_TOKEN: process.env.EMAIL_ACCESS_TOKEN,
+        EMAIL_TOKEN_EXPIRES: process.env.EMAIL_TOKEN_EXPIRES,
       };
     }
   }
