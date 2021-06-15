@@ -10,6 +10,7 @@ export class ConfigdbService {
     const isDevEnv: boolean = process.env.NODE_ENV !== 'production';
 
     if (isDevEnv) {
+      //const envFilePath: string = __dirname + '/../../.env';
       const envFilePath: string = __dirname + '/../../.env';
       const existPath: boolean = existsSync(envFilePath);
 
@@ -34,8 +35,8 @@ export class ConfigdbService {
         TOKENS_EXPIRES:process.env.TOKENS_EXPIRES,
         TOKENS_BIT_LENGTH: process.env.TOKENS_BIT_LENGTH,
 
-        FACEBOOK_CLIENT_SECRET: process.env.FACEBOOK_CLIENT_SECRET,
         FACEBOOK_CLIENT_ID: process.env.FACEBOOK_CLIENT_ID,
+        FACEBOOK_CLIENT_SECRET: process.env.FACEBOOK_CLIENT_SECRET,
         FACEBOOK_BACKEND_URL: process.env.FACEBOOK_BACKEND_URL,
         
         GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,

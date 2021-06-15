@@ -10,7 +10,7 @@ import { TokensModule } from './tokens/tokens.module';
 import { MailModule } from './mail/mail.module';
 
 @Module({
-  imports: [DatabaseModule, ConfigdbModule, SystemModule, AuthModule, MailTemplatesModule, TokensModule],
+  imports: [DatabaseModule, ConfigdbModule, SystemModule, AuthModule, MailTemplatesModule, TokensModule, MailModule],
   controllers: [AppController],
   providers: [AppService],
 })
