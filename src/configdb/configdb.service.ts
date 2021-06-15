@@ -28,6 +28,20 @@ export class ConfigdbService {
         DB_USERNAME: process.env.DB_USERNAME,
         DB_PASSWORD: process.env.DB_PASSWORD,
         JWT_SECRET: process.env.JWT_SECRET,
+        JWT_EXPIRES: process.env.JWT_EXPIRES,
+        
+        TOKENS_ALGORITHM: process.env.TOKENS_ALGORITHM,
+        TOKENS_EXPIRES:process.env.TOKENS_EXPIRES,
+        TOKENS_BIT_LENGTH: process.env.TOKENS_BIT_LENGTH,
+
+        FACEBOOK_CLIENT_SECRET: process.env.FACEBOOK_CLIENT_SECRET,
+        FACEBOOK_CLIENT_ID: process.env.FACEBOOK_CLIENT_ID,
+        FACEBOOK_BACKEND_URL: process.env.FACEBOOK_BACKEND_URL,
+        
+        GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+        GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+        GOOGLE_BACKEND_URL: process.env.GOOGLE_BACKEND_URL,
+
 
         //SEND EMAIL USE OAUTH2
         EMAIL_AUTH_TYPE: process.env.EMAIL_AUTH_TYPE,
