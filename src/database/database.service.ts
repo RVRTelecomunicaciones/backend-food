@@ -15,7 +15,9 @@ export const databaseProvider = [
       username: _config.get(Configuration.DB_USERNAME),
       password: _config.get(Configuration.DB_PASSWORD),
       //entities: [__dirname + '/../**/*.entity.{js,ts}'],
-      entities: [__dirname + '/../**/**/**/*.entity{.js, .ts}'],
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      
+      //entities: [__dirname + '/../**/**/**/*.entity{.js, .ts}'],
       migrations: [__dirname + '/migrations/*{.ts, .js}'],
       synchronize: true,
       logging: true,
