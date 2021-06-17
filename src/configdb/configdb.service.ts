@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { parse } from 'dotenv';
 import { existsSync, readFileSync } from 'fs';
+import 'dotenv/config';
 
 @Injectable()
 export class ConfigdbService {

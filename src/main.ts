@@ -3,6 +3,9 @@ import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { json } from 'body-parser';
 import { urlencoded } from 'express';
+import helmet from 'helmet';
+import 'dotenv/config';
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(
@@ -17,6 +20,8 @@ async function bootstrap() {
     }),
   );
   app.enableCors();
+  app.use(helmet());
+  console.log(process.env.DB_NAME);
 
   const options = new DocumentBuilder()
     .setTitle('Food Delivery - BCA')
