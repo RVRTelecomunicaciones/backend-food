@@ -20,7 +20,6 @@ async function bootstrap() {
     }),
   );
   app.enableCors();
-  app.use(helmet());
   console.log(process.env.DB_NAME);
 
   const options = new DocumentBuilder()
