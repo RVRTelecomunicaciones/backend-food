@@ -7,6 +7,7 @@ import helmet from 'helmet';
 import 'dotenv/config';
 
 async function bootstrap() {
+  console.log(process.env.DB_NAME);
   const app = await NestFactory.create(AppModule);
   app.use(
     json({
@@ -20,7 +21,6 @@ async function bootstrap() {
     }),
   );
   app.enableCors();
-  console.log(process.env.DB_NAME);
 
   const options = new DocumentBuilder()
     .setTitle('Food Delivery - BCA')
