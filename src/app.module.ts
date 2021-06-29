@@ -10,8 +10,9 @@ import { TokensModule } from './tokens/tokens.module';
 import { MailModule } from './mail/mail.module';
 
 @Module({
-  imports: [DatabaseModule, ConfigdbModule, SystemModule, AuthModule, MailTemplatesModule, TokensModule, MailModule],
+  //imports: [DatabaseModule, ConfigdbModule, SystemModule, AuthModule, MailTemplatesModule, TokensModule, MailModule],
+  imports: [SystemModule],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
