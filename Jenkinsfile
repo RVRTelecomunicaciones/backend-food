@@ -20,7 +20,7 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        sh 'sudo pm2 stop'
+        sh 'sudo pm2 stop 0'
         sh 'sudo pm2 start dist/main.js'
       }
     }
