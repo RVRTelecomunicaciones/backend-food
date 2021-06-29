@@ -18,11 +18,6 @@ pipeline {
         sh 'npm run build'
       }
     }
-    stage('Test') {
-      steps {
-        sh 'npm test'
-      }
-    }
     stage('Deploy') {
       steps {
         sh 'sudo pm2 stop'
