@@ -7,7 +7,7 @@ import helmet from 'helmet';
 import 'dotenv/config';
 
 async function bootstrap() {
-  //console.log(process.env.DB_NAME);
+  console.log(process.env.DB_NAME);
   const app = await NestFactory.create(AppModule);
   app.use(
     json({
