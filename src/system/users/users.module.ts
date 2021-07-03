@@ -10,6 +10,6 @@ import { TokensModule } from '../../tokens/tokens.module';
   providers: [UsersService],
   exports: [UsersService],
   controllers: [UsersController],
-  imports: [TypeOrmModule.forFeature([UserRepository]), ImageManagementModule, TokensModule],
+  imports: [TypeOrmModule.forFeature([UserRepository]), ImageManagementModule],
 })
-export class UsersModule {}
+export class UsersModule { }
