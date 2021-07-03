@@ -4,7 +4,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtPayloadBase, JwtPayload } from './jwt-payload.interface';
 import { User } from 'src/system/users/users.entity';
 import { UsersService } from 'src/system/users/users.service';
-
+import 'dotenv/config';
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(public usersService: UsersService) {

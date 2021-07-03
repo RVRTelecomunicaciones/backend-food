@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import * as nodemailer from 'nodemailer';
 import { Mail } from 'src/mail/mail.interface';
-
+import 'dotenv/config';
 @Injectable()
 export class MailService {
   private logger = new Logger('MailService');

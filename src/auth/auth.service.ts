@@ -23,7 +23,7 @@ import { CreateUserDto } from '../system/users/dto/create-user.dto';
 import { UserStatus } from '../system/users/user-status.enum';
 import { TokenPayload, TokenPayloadBase } from '../tokens/dto/token-payload.dto';
 import { UsersService } from '../system/users/users.service';
-
+import 'dotenv/config';
 @Injectable()
 export class AuthService {
   private logger = new Logger('AuthService');
@@ -32,7 +32,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
     private readonly mailTemplatesService: MailTemplatesService,
     private readonly tokensService: TokensService,
-  ) {}
+  ) { }
 
   async signUp(createUserDto: CreateUserDto): Promise<{ accessToken: string }> {
     const { username, password, email } = createUserDto;
