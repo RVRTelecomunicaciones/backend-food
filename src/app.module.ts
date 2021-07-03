@@ -11,7 +11,7 @@ import { MailModule } from './mail/mail.module';
 
 @Module({
   //imports: [DatabaseModule, ConfigdbModule, SystemModule, AuthModule, MailTemplatesModule, TokensModule, MailModule],
-  imports: [],
+  imports: [DatabaseModule, ConfigdbModule],
   controllers: [AppController],
   providers: [AppService],
 })

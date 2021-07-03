@@ -23,7 +23,7 @@ async function bootstrap() {
   app.enableCors();
 
   const options = new DocumentBuilder()
-    .setTitle('Food Delivery - BCA')
+    .setTitle('Food Delivery - BCA ')
     .setDescription('Food Delivery API docs')
     .setVersion('1.0')
     .addTag('foods', '')
