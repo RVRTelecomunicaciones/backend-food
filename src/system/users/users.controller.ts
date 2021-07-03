@@ -10,6 +10,7 @@ import {
   BadRequestException,
   Delete,
   Query,
+  Post,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 
@@ -20,11 +21,12 @@ import { GetUser } from '../../auth/get-user.decorator';
 import { User } from './users.entity';
 import { TokenDto } from '../../auth/dto/tokens.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @ApiTags('Users')
 @Controller('users')
 export class UsersController {
-  constructor(private userService: UsersService) {}
+  constructor(private userService: UsersService) { }
 
   @Get('v1/users/me')
   @UseGuards(AuthGuard('jwt'))
@@ -40,6 +42,13 @@ export class UsersController {
   @Delete('v1/users/')
   async deleteUserByToken(@Query() tokenDto: TokenDto): Promise<{ message: string }> {
     return this.userService.deleteUserByToken(tokenDto);
+  }
+
+  @Post('v1/users/create')
+  async createUser(@Body() createUserDto: CreateUserDto) {
+
+    const userId = await this.userService.createUser(createUserDto);
+    return userId;
   }
 
   @Put('v1/users/me')
