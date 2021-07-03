@@ -3,11 +3,16 @@ pipeline {
 
   tools {nodejs "node"}
 
+  environment{
+
+  }
+
   stages {
 
     stage('Git') {
       steps {
         git 'https://github.com/RVRTelecomunicaciones/backend-food.git'
+        println(env.PATH)
       }
     }
 
