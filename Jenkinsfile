@@ -3,10 +3,6 @@ pipeline {
 
   tools {nodejs "node"}
 
-  environment{
-
-  }
-
   stages {
 
     stage('Git') {
