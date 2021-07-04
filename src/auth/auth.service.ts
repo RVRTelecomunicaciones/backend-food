@@ -23,7 +23,9 @@ import { CreateUserDto } from '../system/users/dto/create-user.dto';
 import { UserStatus } from '../system/users/user-status.enum';
 import { TokenPayload, TokenPayloadBase } from '../tokens/dto/token-payload.dto';
 import { UsersService } from '../system/users/users.service';
+import { config } from 'dotenv';
 import 'dotenv/config';
+
 @Injectable()
 export class AuthService {
   private logger = new Logger('AuthService');
