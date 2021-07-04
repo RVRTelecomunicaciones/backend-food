@@ -5,12 +5,14 @@ import { User } from 'src/system/users/users.entity';
 import { UsersService } from 'src/system/users/users.service';
 import 'dotenv/config';
 import { ExtractJwt, Strategy } from 'passport-jwt';
+import { ConfigdbService } from 'src/configdb/configdb.service';
+import { Configuration } from 'src/configdb/config.enum';
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(public usersService: UsersService) {
+  constructor(public usersService: UsersService, config: ConfigdbService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: 'B[T@_6_-M2ux\^u),<7D9hsu99x.2-}bX_2bUXgnW?#5YT*cn$d{HjvBW^#Jfs]j',
+      secretOrKey: config.get(Configuration.JWT_SECRET_KEY),
     });
   }
 

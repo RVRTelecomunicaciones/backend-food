@@ -12,6 +12,7 @@ import { GoogleStrategy } from './strategy/google.strategy';
 import 'dotenv/config';
 import { JwtStrategy } from './strategy/jwt.strategy';
 import { PassportModule } from '@nestjs/passport';
+import { Configuration } from 'src/configdb/config.enum';
 
 @Module({
   imports: [
@@ -21,10 +22,10 @@ import { PassportModule } from '@nestjs/passport';
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({
       imports: [ConfigdbModule],
-      useFactory: async (configService: ConfigdbService) => {
+      useFactory: async (config: ConfigdbService) => {
         return {
-          secret: process.env.JWT_SECRET_KEY,
-          signOptions: { expiresIn: process.env.JWT_EXPIRES },
+          secret: config.get(Configuration.JWT_SECRET_KEY),
+          signOptions: { expiresIn: config.get(Configuration.JWT_EXPIRES) },
         }
       },
       inject: [ConfigdbService]
