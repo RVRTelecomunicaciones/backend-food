@@ -79,6 +79,8 @@ export class AuthService {
   async forgotPassword(emailDto: EmailDto): Promise<{ message: string }> {
     const { email } = emailDto;
     const user = await this.usersService.getUserByEmail(email);
+    console.log("LLEGO");
+    console.log(user.email);
     if (!user) {
       throw new NotFoundException('Healthy Dev no encontró un usuario registrado con ese email');
     }

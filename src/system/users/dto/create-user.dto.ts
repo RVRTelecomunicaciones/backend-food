@@ -1,9 +1,12 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Length, IsString, Matches, IsEmail } from 'class-validator';
 
 export class CreateUserDto {
+  @ApiProperty()
   @IsEmail({}, { message: 'Ingrese un email válido' })
   email: string;
 
+  @ApiProperty()
   @IsString({ message: 'Ingrese un texto en el nombre de usuario.' })
   @Matches(/(?=^.{4,20}$)^[a-zA-Z]+[a-zA-Z\-\_0-9.]+[a-zA-Z0-9]+$/, {
     message:
@@ -11,6 +14,7 @@ export class CreateUserDto {
   })
   username: string;
 
+  @ApiProperty()
   @Matches(/^(?!.*\s)(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,250}$/, {
     message:
       'El password debe contener al menos una mayúscula, numeros y caracteres. Largo entre 8 y 250 caracteres',
