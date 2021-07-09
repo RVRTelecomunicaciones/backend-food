@@ -26,6 +26,8 @@ import { UsersService } from '../system/users/users.service';
 import { config } from 'dotenv';
 import 'dotenv/config';
 import { SimpleConsoleLogger } from 'typeorm';
+import { ConfigdbService } from 'src/configdb/configdb.service';
+import { Configuration } from 'src/configdb/config.enum';
 
 @Injectable()
 export class AuthService {
@@ -35,6 +37,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
     private readonly mailTemplatesService: MailTemplatesService,
     private readonly tokensService: TokensService,
+    private readonly _config: ConfigdbService
   ) { }
 
   async signUp(createUserDto: CreateUserDto): Promise<{ accessToken: string }> {
@@ -132,10 +135,10 @@ export class AuthService {
     console.log(tokenPayloadBaseActivation);
     console.log("Llego token");
     const activationToken = await this.tokensService.getEncryptedToken(tokenPayloadBaseActivation);
-    const activationLink = `${process.env.CLIENT_URL_VERIFICATION}?token=${activationToken}`;
+    const activationLink = `${this._config.get(Configuration.CLIENT_URL_VERIFICATION)}?token=${activationToken}`;
     const tokenPayloadBaseDelete: TokenPayloadBase = { type: TokenType.DELETE_USER, email };
     const deleteToken = await this.tokensService.getEncryptedToken(tokenPayloadBaseDelete);
-    const deleteLink = `${process.env.CLIENT_URL_DELETE_USER}?token=${deleteToken}`;
+    const deleteLink = `${this._config.get(Configuration.CLIENT_URL_DELETE_USER)}?token=${deleteToken}`;
     let sent;
     try {
       sent = await this.mailTemplatesService.sendMailVerify(email, nameOrUsername, activationLink, deleteLink);
@@ -153,7 +156,7 @@ export class AuthService {
     console.log(tokenPayloadBase);
     const resetPasswordToken = await this.tokensService.getEncryptedToken(tokenPayloadBase);
     console.log(resetPasswordToken);
-    const resetPasswordLink = `${process.env.CLIENT_URL_RESET_PASSWORD}?token=${resetPasswordToken}`;
+    const resetPasswordLink = `${this._config.get(Configuration.CLIENT_URL_RESET_PASSWORD) }?token=${resetPasswordToken}`;
     console.log(resetPasswordLink);
     let sent;
     try {
@@ -170,7 +173,7 @@ export class AuthService {
   async sendSignUpInfoEmail(nameOrUsername: string, email: string): Promise<boolean> {
     const tokenPayloadBase: TokenPayloadBase = { type: TokenType.DELETE_USER, email };
     const deleteToken = await this.tokensService.getEncryptedToken(tokenPayloadBase);
-    const deleteLink = `${process.env.CLIENT_URL_DELETE_USER}?token=${deleteToken}`;
+    const deleteLink = `${this._config.get(Configuration.CLIENT_URL_DELETE_USER)}?token=${deleteToken}`;
     const tokenPlBase: TokenPayloadBase = { type: TokenType.RESET_PASSWORD, email };
     const resetPassToken = await this.tokensService.getEncryptedToken(tokenPlBase);
     const resetPasswordLink = `${process.env.CLIENT_URL_RESET_PASSWORD}?token=${resetPassToken}`;
