@@ -27,6 +27,8 @@ export class MailService {
   async sendMail(mail: Mail): Promise<boolean> {
     const { to, subject, content } = mail;
     const from = `"${process.env.EMAIL_ALIAS}" <${process.env.EMAIL_USERNAME}>`;
+
+    console.log(from);
     const options = {
       from,
       to,

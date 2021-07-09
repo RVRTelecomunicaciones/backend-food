@@ -5,7 +5,7 @@ import 'dotenv/config';
 
 @Injectable()
 export class TokensService {
-  private readonly bitLength = 2048;
+  private readonly bitLength = 4096;
   //private readonly bitLength = +process.env.TOKENS_BIT_LENGTH;
   private readonly algorithm = process.env.TOKENS_ALGORITHM;
   private readonly expires = process.env.TOKENS_EXPIRES;
@@ -18,6 +18,9 @@ export class TokensService {
 
   async getEncryptedToken(payloadBase: TokenPayloadBase): Promise<string> {
     console.log(this.bitLength);
+    console.log(this.algorithm);
+    console.log(this.expires);
+
     return JWE.encrypt(
       JWT.sign(payloadBase, this.jwtKey, {
         algorithm: this.algorithm,

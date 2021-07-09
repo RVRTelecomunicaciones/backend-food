@@ -25,6 +25,7 @@ import { TokenPayload, TokenPayloadBase } from '../tokens/dto/token-payload.dto'
 import { UsersService } from '../system/users/users.service';
 import { config } from 'dotenv';
 import 'dotenv/config';
+import { SimpleConsoleLogger } from 'typeorm';
 
 @Injectable()
 export class AuthService {
@@ -85,7 +86,11 @@ export class AuthService {
       throw new NotFoundException('Healthy Dev no encontró un usuario registrado con ese email');
     }
     const nameOrUsername = user.name ? user.name : user.username;
+    console.log(nameOrUsername);
+
     const sent = await this.sendEmailForgotPassword(nameOrUsername, email);
+    console.log(sent);
+
     if (!sent) {
       throw new InternalServerErrorException(
         'Healthy Dev le informa que no se ha podido enviar email. Inténtelo nuevamente más tarde',
@@ -124,6 +129,8 @@ export class AuthService {
 
   async sendEmailVerification(nameOrUsername: string, email: string): Promise<boolean> {
     const tokenPayloadBaseActivation: TokenPayloadBase = { type: TokenType.VERIFY_EMAIL, email };
+    console.log(tokenPayloadBaseActivation);
+    console.log("Llego token");
     const activationToken = await this.tokensService.getEncryptedToken(tokenPayloadBaseActivation);
     const activationLink = `${process.env.CLIENT_URL_VERIFICATION}?token=${activationToken}`;
     const tokenPayloadBaseDelete: TokenPayloadBase = { type: TokenType.DELETE_USER, email };
@@ -140,12 +147,19 @@ export class AuthService {
   }
 
   async sendEmailForgotPassword(nameOrUsername: string, email: string): Promise<boolean> {
+
+    console.log("Email forgot");
     const tokenPayloadBase: TokenPayloadBase = { type: TokenType.RESET_PASSWORD, email };
+    console.log(tokenPayloadBase);
     const resetPasswordToken = await this.tokensService.getEncryptedToken(tokenPayloadBase);
+    console.log(resetPasswordToken);
     const resetPasswordLink = `${process.env.CLIENT_URL_RESET_PASSWORD}?token=${resetPasswordToken}`;
+    console.log(resetPasswordLink);
     let sent;
     try {
       sent = await this.mailTemplatesService.sendMailResetPassword(email, nameOrUsername, resetPasswordLink);
+      console.log(sent);
+
     } catch (error) {
       this.logger.error(`Failed send mail ${error}`);
       return false;
@@ -172,6 +186,8 @@ export class AuthService {
 
   async signIn(authCredentialsDto: AuthCredentialsDto): Promise<{ accessToken: string }> {
     const username = await this.validateUserPassword(authCredentialsDto);
+    console.log(username);
+
     if (!username) {
       throw new UnauthorizedException('Verifique los datos ingresados');
     }
@@ -183,6 +199,7 @@ export class AuthService {
   async validateUserPassword(authCredentialsDto: AuthCredentialsDto): Promise<string> {
     const { usernameOrEmail, password } = authCredentialsDto;
     const user = await this.usersService.getUserByUsernameOrEmail(usernameOrEmail);
+    console.log(user);
     if (user && (await bcrypt.compare(password, user.password))) {
       return user.username;
     }

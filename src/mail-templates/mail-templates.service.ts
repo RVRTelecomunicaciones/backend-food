@@ -49,14 +49,21 @@ export class MailTemplatesService {
       nameOrUsername,
       resetPasswordLink,
     };
+    console.log(templateData);
     const mjmlTemplate = resetPasswordTemplate;
     const renderedMJML = mustache.render(mjmlTemplate, templateData);
     const html = mjml(renderedMJML).html;
     const subject = 'Cambiá tu contraseña';
     const to = email;
+    console.log(to);
+
     const content = html;
     const mail: Mail = { to, subject, content };
+    console.log(mail);
+
     const sent = await this.mailService.sendMail(mail);
+    console.log(sent);
+
     return sent;
   }
 }

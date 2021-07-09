@@ -72,6 +72,8 @@ export const resetPasswordTemplate = `
         <mj-button background-color="#F4DD27" color="#FFF" href="{{resetPasswordLink}}" font-family="Arial, sans-serif" padding="20px 0 0 0" font-weight="bold" font-size="16px">
           Crear nueva contraseña
         </mj-button>
+        <p>test boton de <a href="{{resetPasswordLink}}" style="text-decoration: none; color: inherit;">FrontEndCafé</a></p>
+
       </mj-column>
     </mj-section>
     <mj-section background-color="#06393e" padding-bottom="20px" padding-top="0">
@@ -117,7 +119,9 @@ export const infoTemplate = `
         <mj-text align="center" padding="10px 25px" font-size="20px" color="#FFF"><strong>Hola {{nameOrUsername}}!</strong></mj-text>
         <mj-text align="center" font-size="18px" font-family="Arial" color="#FFF">Muchas gracias por ingresar a Healthy Dev<br/> Si quieres crear una contraseña para ingresar solo con tu mail, haz click en el siguiente boton</mj-text>
         <mj-button background-color="#F4DD27" color="#FFF" href="{{resetPasswordLink}}" font-family="Arial, sans-serif" padding="20px 0 20px 0" font-weight="bold" font-size="16px">Crear Contraseña</mj-button>
-        <mj-text align="center" font-size="12px" font-family="Arial" color="#FFF">Si usted no solicitó la creación de la cuenta, por favor presione 
+        <p>test boton de <a href="{{resetPasswordLink}}" style="text-decoration: none; color: inherit;">FrontEndCafé</a></p>
+
+        <mj-text align="center" font-size="12px" font-family="Arial" color="#FFF">Si usted no solicitó la creación de la cuenta, por favor presione
          <span style="color:red;"> <a href="{{deleteLink}}" style="text-decoration: none; color: inherit;">aquí</a></span> para eliminar la cuenta, disculpe las molestias.</mj-text>
       </mj-column>
     </mj-section>

@@ -50,7 +50,7 @@ export class AuthController {
   @Post('v1/auth/signin')
   async signIn(
     @Body(
-      new ValidationPipe({
+       new ValidationPipe({
         exceptionFactory: (errors: ValidationError[]) => {
           throw new UnauthorizedException('Healthy Dev te pide que verifiques los datos ingresados');
         },
