@@ -10,6 +10,8 @@ import { TokensModule } from './tokens/tokens.module';
 import { MailModule } from './mail/mail.module';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from '@hapi/joi';
+import { join } from 'path';
+
 
 @Module({
   imports: [ConfigModule.forRoot({
