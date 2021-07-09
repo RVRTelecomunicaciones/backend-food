@@ -3,18 +3,17 @@ import { TokenPayload, TokenPayloadBase } from './dto/token-payload.dto';
 import { JWE, JWK, JWT } from 'jose';
 import { config } from 'dotenv';
 import 'dotenv/config';
-import { ConfigdbService } from 'src/configdb/configdb.service';
-import { Configuration } from 'src/configdb/config.enum';
+import { ConfigService } from '@nestjs/config';
 @Injectable()
 export class TokensService {
   
   constructor(
-    private readonly _config: ConfigdbService
+    private readonly _config: ConfigService
   ) { }
   private readonly bitLength = 4096;
   //private readonly bitLength = +process.env.TOKENS_BIT_LENGTH;
-  private readonly algorithm = this._config.get(Configuration.TOKENS_ALGORITHM);
-  private readonly expires = this._config.get(Configuration.TOKENS_EXPIRES);
+  private readonly algorithm = this._config.get('TOKENS_ALGORITHM');
+  private readonly expires = this._config.get('TOKENS_EXPIRES');
   
 
   private readonly jwtKey = JWK.generateSync('oct', this.bitLength, {

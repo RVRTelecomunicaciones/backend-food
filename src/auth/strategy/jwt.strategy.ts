@@ -5,14 +5,14 @@ import { User } from 'src/system/users/users.entity';
 import { UsersService } from 'src/system/users/users.service';
 import 'dotenv/config';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { ConfigdbService } from 'src/configdb/configdb.service';
-import { Configuration } from 'src/configdb/config.enum';
+import { ConfigService } from '@nestjs/config';
+
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(public usersService: UsersService, config: ConfigdbService) {
+  constructor(public usersService: UsersService, config: ConfigService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: config.get(Configuration.JWT_SECRET_KEY),
+      secretOrKey: config.get('JWT_SECRET_KEY'),
     });
   }
 

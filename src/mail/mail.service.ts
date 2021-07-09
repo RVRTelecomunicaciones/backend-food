@@ -2,31 +2,35 @@ import { Injectable, Logger } from '@nestjs/common';
 import * as nodemailer from 'nodemailer';
 import { Mail } from 'src/mail/mail.interface';
 import 'dotenv/config';
+import { ConfigService } from '@nestjs/config';
 @Injectable()
 export class MailService {
   private logger = new Logger('MailService');
   private transporter: nodemailer.Transporter;
 
-  constructor() {
+  constructor(
+    private readonly _config: ConfigService
+  ) {
     this.transporter = nodemailer.createTransport({
-      host: process.env.EMAIL_HOST,
-      port: +process.env.EMAIL_PORT,
-      secure: process.env.EMAIL_SECURE === 'true',
+      host: this._config.get('EMAIL_HOST'),
+      port: this._config.get('EMAIL_PORT'),
+      secure: this._config.get('EMAIL_SECURE') === 'true',
       auth: {
         type: 'OAUTH2',
-        user: process.env.EMAIL_USERNAME,
-        clientId: process.env.EMAIL_CLIENT_ID,
-        clientSecret: process.env.EMAIL_CLIENT_SECRET,
-        refreshToken: process.env.EMAIL_REFRESH_TOKEN,
-        accessToken: process.env.EMAIL_ACCESS_TOKEN,
+        user: this._config.get('EMAIL_USERNAME'),
+        clientId: this._config.get('EMAIL_CLIENT_ID'),
+        clientSecret: this._config.get('EMAIL_CLIENT_SECRET'),
+        refreshToken: this._config.get('EMAIL_REFRESH_TOKEN'),
+        accessToken: this._config.get('EMAIL_ACCESS_TOKEN'),
         expires: 1484314697598,
       },
     });
+
   }
 
   async sendMail(mail: Mail): Promise<boolean> {
     const { to, subject, content } = mail;
-    const from = `"${process.env.EMAIL_ALIAS}" <${process.env.EMAIL_USERNAME}>`;
+    const from = `"${this._config.get('EMAIL_ALIAS')}" <${this._config.get('EMAIL_USERNAME')}>`;
 
     console.log(from);
     const options = {
