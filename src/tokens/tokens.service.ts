@@ -3,12 +3,20 @@ import { TokenPayload, TokenPayloadBase } from './dto/token-payload.dto';
 import { JWE, JWK, JWT } from 'jose';
 import { config } from 'dotenv';
 import 'dotenv/config';
+import { ConfigdbService } from 'src/configdb/configdb.service';
+import { Configuration } from 'src/configdb/config.enum';
 @Injectable()
 export class TokensService {
+  
+  constructor(
+    private readonly _config: ConfigdbService
+  ) { }
   private readonly bitLength = 4096;
   //private readonly bitLength = +process.env.TOKENS_BIT_LENGTH;
-  private readonly algorithm = process.env.TOKENS_ALGORITHM;
-  private readonly expires = process.env.TOKENS_EXPIRES;
+  private readonly algorithm = this._config.get(Configuration.TOKENS_ALGORITHM);
+  private readonly expires = this._config.get(Configuration.TOKENS_EXPIRES);
+  
+
   private readonly jwtKey = JWK.generateSync('oct', this.bitLength, {
     use: 'sig',
   });
