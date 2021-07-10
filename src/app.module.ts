@@ -13,11 +13,14 @@ import * as Joi from '@hapi/joi';
 import { join } from 'path';
 import { config } from 'dotenv'
 require('dotenv').config() 
+const ENV = process.env.NODE_ENV;
 
 
 @Module({
-  imports: [ConfigModule.forRoot({
-    validationSchema: Joi.object({
+  imports: [ConfigModule.forRoot(
+    {
+      envFilePath: !ENV ? '.env.dev' : `.env.${ENV}`,
+      validationSchema: Joi.object({
       DB_HOST: Joi.string().required(),
       DB_PORT: Joi.number().required(),
       DB_NAME: Joi.string().required(),

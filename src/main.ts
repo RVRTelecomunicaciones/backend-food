@@ -5,6 +5,7 @@ import { json } from 'body-parser';
 import { urlencoded } from 'express';
 import helmet from 'helmet';
 import { config } from 'dotenv'
+import { ConfigService } from '@nestjs/config';
 require('dotenv').config() 
 
 
@@ -23,6 +24,7 @@ async function bootstrap() {
     }),
   );
   app.enableCors();
+  const configService = app.get(ConfigService);
 
   const options = new DocumentBuilder()
     .setTitle('Food Delivery - BCA ')
@@ -39,6 +41,8 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('apirest', app, document);
+
+
   await app.listen(3000);
 }
 bootstrap();
