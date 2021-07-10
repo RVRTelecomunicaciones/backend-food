@@ -12,6 +12,7 @@ import { ConfigModule } from '@nestjs/config';
 import * as Joi from '@hapi/joi';
 import { join } from 'path';
 import { config } from 'dotenv'
+require('dotenv').config() 
 
 
 @Module({

@@ -4,7 +4,9 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { json } from 'body-parser';
 import { urlencoded } from 'express';
 import helmet from 'helmet';
-import 'dotenv/config';
+import { config } from 'dotenv'
+require('dotenv').config() 
+
 
 async function bootstrap() {
   console.log(process.env.DB_NAME);
