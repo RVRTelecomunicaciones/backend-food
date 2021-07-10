@@ -17,6 +17,7 @@ const ENV = process.env.NODE_ENV;
 @Module({
   imports: [ConfigModule.forRoot(
     {
+      isGlobal: true,
       envFilePath: !ENV ? '.env' : `${ENV}.env`,
       validationSchema: Joi.object({
       DB_HOST: Joi.string().required(),
