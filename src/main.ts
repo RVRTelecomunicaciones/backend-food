@@ -25,6 +25,8 @@ async function bootstrap() {
   );
   app.enableCors();
   const configService = app.get(ConfigService);
+  require('dotenv').config({ path: `../${process.env.NODE_ENV}.env` });
+
 
   const options = new DocumentBuilder()
     .setTitle('Food Delivery - BCA ')

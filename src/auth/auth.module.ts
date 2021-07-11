@@ -16,6 +16,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule,
     UsersModule,
     MailTemplatesModule,
     TokensModule,
@@ -30,10 +31,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       },
       inject: [ConfigService]
     }),
-    ConfigModule
   ],
   controllers: [AuthController],
-  providers: [AuthService, JwtStrategy],
+  providers: [AuthService, JwtStrategy,ConfigService],
   exports: [JwtStrategy, PassportModule],
 })
 export class AuthModule { }
