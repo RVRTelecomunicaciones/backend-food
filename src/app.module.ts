@@ -22,7 +22,7 @@ const ENV = process.env.NODE_ENV;
       isGlobal: true,
       envFilePath: !ENV ? '.env' : `${ENV}.env`,
       
-  }),DatabaseModule, ConfigdbModule, SystemModule, AuthModule, MailTemplatesModule, TokensModule, MailModule],
+  }),ConfigModule,DatabaseModule, ConfigdbModule, SystemModule, AuthModule, MailTemplatesModule, TokensModule, MailModule],
   //imports: [DatabaseModule, ConfigdbModule, SystemModule],
   controllers: [AppController],
   providers: [AppService],
