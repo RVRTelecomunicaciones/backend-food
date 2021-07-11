@@ -22,7 +22,7 @@ console.log(process.env.NODE_ENV);
   imports: [ConfigModule.forRoot(
     {
       isGlobal: true,
-      envFilePath: !ENV ? '.env' : `${ENV}.env`,
+      envFilePath: !ENV ? '.env' : `production.env`,
       
   }),ConfigModule,DatabaseModule, ConfigdbModule, SystemModule, AuthModule, MailTemplatesModule, TokensModule, MailModule],
   //imports: [DatabaseModule, ConfigdbModule, SystemModule],
