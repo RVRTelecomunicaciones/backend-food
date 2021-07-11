@@ -17,6 +17,7 @@ require('dotenv').config()
 const ENV = process.env.NODE_ENV;
 
 console.log(ENV);
+console.log(process.env.NODE_ENV);
 @Module({
   imports: [ConfigModule.forRoot(
     {
