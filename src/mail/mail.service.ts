@@ -2,19 +2,19 @@ import { Injectable, Logger } from '@nestjs/common';
 import * as nodemailer from 'nodemailer';
 import { Mail } from 'src/mail/mail.interface';
 import 'dotenv/config';
-import { ConfigService } from '@nestjs/config';
 import { Configuration } from 'src/configdb/config.enum';
+import { ConfigdbService } from 'src/configdb/configdb.service';
 @Injectable()
 export class MailService {
   private logger = new Logger('MailService');
   private transporter: nodemailer.Transporter;
 
   constructor(
-    private readonly _config: ConfigService
+    private readonly _config: ConfigdbService
   ) {
     this.transporter = nodemailer.createTransport({
-      host: this._config.get(Configuration.EMAIL_HOST),
-      port: this._config.get(Configuration.EMAIL_PORT),
+      host: 'smtp.gmail.com',
+      port: 465,
       secure: this._config.get(Configuration.EMAIL_SECURE) === 'true',
       auth: {
         type: 'OAUTH2',
