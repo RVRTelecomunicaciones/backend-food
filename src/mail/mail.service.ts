@@ -3,6 +3,7 @@ import * as nodemailer from 'nodemailer';
 import { Mail } from 'src/mail/mail.interface';
 import 'dotenv/config';
 import { ConfigService } from '@nestjs/config';
+import { Configuration } from 'src/configdb/config.enum';
 @Injectable()
 export class MailService {
   private logger = new Logger('MailService');
@@ -12,16 +13,16 @@ export class MailService {
     private readonly _config: ConfigService
   ) {
     this.transporter = nodemailer.createTransport({
-      host: this._config.get('EMAIL_HOST'),
-      port: this._config.get('EMAIL_PORT'),
-      secure: this._config.get('EMAIL_SECURE') === 'true',
+      host: this._config.get(Configuration.EMAIL_HOST),
+      port: this._config.get(Configuration.EMAIL_PORT),
+      secure: this._config.get(Configuration.EMAIL_SECURE) === 'true',
       auth: {
         type: 'OAUTH2',
-        user: this._config.get('EMAIL_USERNAME'),
-        clientId: this._config.get('EMAIL_CLIENT_ID'),
-        clientSecret: this._config.get('EMAIL_CLIENT_SECRET'),
-        refreshToken: this._config.get('EMAIL_REFRESH_TOKEN'),
-        accessToken: this._config.get('EMAIL_ACCESS_TOKEN'),
+        user: this._config.get(Configuration.EMAIL_USERNAME),
+        clientId: this._config.get(Configuration.EMAIL_CLIENT_ID),
+        clientSecret: this._config.get(Configuration.EMAIL_CLIENT_SECRET),
+        refreshToken: this._config.get(Configuration.EMAIL_REFRESH_TOKEN),
+        accessToken: this._config.get(Configuration.EMAIL_ACCESS_TOKEN),
         expires: 1484314697598,
       },
     });
@@ -30,7 +31,7 @@ export class MailService {
 
   async sendMail(mail: Mail): Promise<boolean> {
     const { to, subject, content } = mail;
-    const from = `"${this._config.get('EMAIL_ALIAS')}" <${this._config.get('EMAIL_USERNAME')}>`;
+    const from = `"${this._config.get(Configuration.EMAIL_ALIAS)}" <${this._config.get(Configuration.EMAIL_USERNAME)}>`;
 
     console.log(from);
     const options = {

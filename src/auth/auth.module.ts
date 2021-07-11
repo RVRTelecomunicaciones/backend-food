@@ -13,23 +13,24 @@ import 'dotenv/config';
 import { JwtStrategy } from './strategy/jwt.strategy';
 import { PassportModule } from '@nestjs/passport';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { Configuration } from 'src/configdb/config.enum';
 
 @Module({
   imports: [
-    ConfigModule,
     UsersModule,
     MailTemplatesModule,
     TokensModule,
+    ConfigdbModule,
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({
-      imports: [ConfigModule],
-      useFactory: async (config: ConfigService) => {
+      imports: [ConfigdbModule],
+      useFactory: async (config: ConfigdbService) => {
         return {
-          secret: config.get('JWT_SECRET_KEY'),
-          signOptions: { expiresIn: config.get('JWT_EXPIRES') },
+          secret: config.get(Configuration.JWT_SECRET_KEY),
+          signOptions: { expiresIn: config.get(Configuration.JWT_EXPIRES) },
         }
       },
-      inject: [ConfigService]
+      inject: [ConfigdbService]
     }),
   ],
   controllers: [AuthController],

@@ -19,12 +19,7 @@ const ENV = process.env.NODE_ENV;
 console.log(ENV);
 console.log(process.env.NODE_ENV);
 @Module({
-  imports: [ConfigModule.forRoot(
-    {
-      isGlobal: true,
-      envFilePath: !ENV ? '.env' : `production.env`,
-      
-  }),ConfigModule,DatabaseModule, ConfigdbModule, SystemModule, AuthModule, MailTemplatesModule, TokensModule, MailModule],
+  imports: [DatabaseModule, ConfigdbModule, SystemModule, AuthModule, MailTemplatesModule, TokensModule, MailModule],
   //imports: [DatabaseModule, ConfigdbModule, SystemModule],
   controllers: [AppController],
   providers: [AppService],
