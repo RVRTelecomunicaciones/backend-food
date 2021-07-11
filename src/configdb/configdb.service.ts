@@ -9,7 +9,8 @@ export class ConfigdbService {
 
   constructor() {
     const isDevEnv: boolean = process.env.NODE_ENV !== 'production';
-
+  
+    console.log(isDevEnv);
     if (isDevEnv) {
       //const envFilePath: string = __dirname + '/../../.env';
       const envFilePath: string = __dirname + '/../../.env';
