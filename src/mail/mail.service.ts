@@ -13,8 +13,8 @@ export class MailService {
     private readonly _config: ConfigdbService
   ) {
     this.transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 465,
+      host: this._config.get(Configuration.EMAIL_HOST),
+      port: Number(this._config.get(Configuration.EMAIL_PORT)),
       secure: this._config.get(Configuration.EMAIL_SECURE) === 'true',
       auth: {
         type: 'OAUTH2',

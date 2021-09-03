@@ -27,7 +27,6 @@ export class AuthController {
   async verifyAccount(@Query() tokenDto: TokenDto): Promise<{ message: string }> {
     return this.authService.verifyAccount(tokenDto);
   }
-
   @Get('/v1/auth/resend-verification/:email')
   async resendVerificationAccount(@Param() emailDto: EmailDto): Promise<{ message: string }> {
     return this.authService.resendVerificationAccount(emailDto);
@@ -50,7 +49,7 @@ export class AuthController {
   @Post('v1/auth/signin')
   async signIn(
     @Body(
-       new ValidationPipe({
+      new ValidationPipe({
         exceptionFactory: (errors: ValidationError[]) => {
           throw new UnauthorizedException('Healthy Dev te pide que verifiques los datos ingresados');
         },

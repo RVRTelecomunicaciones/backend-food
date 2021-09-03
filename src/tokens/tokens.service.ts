@@ -11,7 +11,7 @@ export class TokensService {
   constructor(
     private readonly _config: ConfigService
   ) { }
-  private readonly bitLength = 4096;
+  private readonly bitLength = 2048;
   //private readonly bitLength = +process.env.TOKENS_BIT_LENGTH;
   private readonly algorithm = this._config.get(Configuration.TOKENS_ALGORITHM);
   private readonly expires = this._config.get(Configuration.TOKENS_EXPIRES);

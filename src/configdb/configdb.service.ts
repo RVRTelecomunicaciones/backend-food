@@ -59,6 +59,12 @@ export class ConfigdbService {
         EMAIL_REFRESH_TOKEN: process.env.EMAIL_REFRESH_TOKEN,
         EMAIL_ACCESS_TOKEN: process.env.EMAIL_ACCESS_TOKEN,
         EMAIL_TOKEN_EXPIRES: process.env.EMAIL_TOKEN_EXPIRES,
+
+        CLIENT_URL_VERIFICATION : process.env.CLIENT_URL_VERIFICATION,
+        CLIENT_URL_RESET_PASSWORD : process.env.CLIENT_URL_RESET_PASSWORD,
+        CLIENT_URL_DELETE_USER : process.env.CLIENT_URL_DELETE_USER,
+        SOCIAL_AUTH_CLIENT_URL : process.env.SOCIAL_AUTH_CLIENT_URL,
+
       };
     }
   }

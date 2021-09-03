@@ -45,7 +45,7 @@ export class AuthService {
     const userId = await this.usersService.createUser(createUserDto);
     if (!userId) {
       throw new InternalServerErrorException(
-        'Healthy Dev no pudo registrar su usuario en este momento, intentelo nuevamente más tarde',
+        'Allemant Dev no pudo registrar su usuario en este momento, intentelo nuevamente más tarde',
       );
     }
     try {
@@ -61,20 +61,20 @@ export class AuthService {
     const { email } = emailDto;
     const user = await this.usersService.getUserByEmail(email);
     if (!user) {
-      throw new NotFoundException('Healthy Dev no encontró un usuario registrado con ese email');
+      throw new NotFoundException('Allemant Dev no encontró un usuario registrado con ese email');
     }
     if (user.status !== UserStatus.INACTIVO) {
-      throw new ConflictException('Healthy Dev le informa que la cuenta ya esta activa');
+      throw new ConflictException('Allemant Dev le informa que la cuenta ya esta activa');
     }
     const nameOrUsername = user.name ? user.name : user.username;
     const sent = await this.sendEmailVerification(nameOrUsername, email);
     if (!sent) {
       throw new InternalServerErrorException(
-        'Healthy Dev le informa que no se ha podido enviar email. Inténtelo nuevamente más tarde',
+        'Allemant Dev le informa que no se ha podido enviar email. Inténtelo nuevamente más tarde',
       );
     }
     return {
-      message: 'Healthy Dev le informa que se ha reenviado el email de verificación correctamente',
+      message: 'Allemant Dev le informa que se ha reenviado el email de verificación correctamente',
     };
   }
 
@@ -84,7 +84,7 @@ export class AuthService {
     console.log("LLEGO");
     console.log(user.email);
     if (!user) {
-      throw new NotFoundException('Healthy Dev no encontró un usuario registrado con ese email');
+      throw new NotFoundException('Allemant Dev no encontró un usuario registrado con ese email');
     }
     const nameOrUsername = user.name ? user.name : user.username;
     console.log(nameOrUsername);
@@ -94,11 +94,11 @@ export class AuthService {
 
     if (!sent) {
       throw new InternalServerErrorException(
-        'Healthy Dev le informa que no se ha podido enviar email. Inténtelo nuevamente más tarde',
+        'Allemant Dev le informa que no se ha podido enviar email. Inténtelo nuevamente más tarde',
       );
     }
     return {
-      message: 'Healthy Dev le informa que se ha enviado el email para crear nueva contraseña correctamente',
+      message: 'Se le informa que se ha enviado el email para crear nueva contraseña correctamente',
     };
   }
 
@@ -108,24 +108,24 @@ export class AuthService {
       tokenPayload = await this.tokensService.verifyEncryptedToken(tokenDto.token);
     } catch (error) {
       throw new UnauthorizedException(
-        'Healthy Dev le informa que no ha podido verificar cuenta, por favor solicite nuevamente envio de verificación',
+        'Allemant Dev le informa que no ha podido verificar cuenta, por favor solicite nuevamente envio de verificación',
       );
     }
     if (tokenPayload.type !== TokenType.VERIFY_EMAIL) {
       throw new UnauthorizedException(
-        'Healthy Dev le informa que no ha podido verificar cuenta, por favor solicite nuevamente envio de verificación',
+        'Allemant Dev le informa que no ha podido verificar cuenta, por favor solicite nuevamente envio de verificación',
       );
     }
     const user = await this.usersService.getUserByEmail(tokenPayload.email);
     if (!user) {
-      throw new NotFoundException('Healthy Dev no encontró un usuario registrado con ese email');
+      throw new NotFoundException('Allemant Dev no encontró un usuario registrado con ese email');
     }
     if (user.status !== UserStatus.INACTIVO) {
-      throw new ConflictException('Healthy Dev le informa que la cuenta ya esta activa');
+      throw new ConflictException('Allemant Dev le informa que la cuenta ya esta activa');
     }
     user.status = UserStatus.ACTIVO;
     await user.save();
-    return { message: 'Healthy Dev le informa que el usuario fue activado correctamente.' };
+    return { message: 'Allemant Dev le informa que el usuario fue activado correctamente.' };
   }
 
   async sendEmailVerification(nameOrUsername: string, email: string): Promise<boolean> {
@@ -154,7 +154,9 @@ export class AuthService {
     console.log(tokenPayloadBase);
     const resetPasswordToken = await this.tokensService.getEncryptedToken(tokenPayloadBase);
     console.log(resetPasswordToken);
-    const resetPasswordLink = `${this._config.get(Configuration.CLIENT_URL_RESET_PASSWORD) }?token=${resetPasswordToken}`;
+    const resetPasswordLink = `${this._config.get(Configuration.CLIENT_URL_RESET_PASSWORD)}?token=${resetPasswordToken}`;
+    
+    console.log("link");
     console.log(resetPasswordLink);
     let sent;
     try {
@@ -213,17 +215,17 @@ export class AuthService {
       tokenPayload = await this.tokensService.verifyEncryptedToken(tokenDto.token);
     } catch (error) {
       throw new UnauthorizedException(
-        'Healthy Dev le informa que no ha podido cambiar la contraseña, por favor solicite nuevamente envio para realizar nueva contraseña',
+        'Allemant Dev le informa que no ha podido cambiar la contraseña, por favor solicite nuevamente envio para realizar nueva contraseña',
       );
     }
     if (tokenPayload.type !== TokenType.RESET_PASSWORD) {
       throw new UnauthorizedException(
-        'Healthy Dev le informa que no ha podido cambiar la contraseña, por favor solicite nuevamente envio para realizar nueva contraseña',
+        'Allemant Dev le informa que no ha podido cambiar la contraseña, por favor solicite nuevamente envio para realizar nueva contraseña',
       );
     }
     const user = await this.usersService.getUserByEmail(tokenPayload.email);
     if (!user) {
-      throw new NotFoundException('Healthy Dev no encontró un usuario registrado con ese email');
+      throw new NotFoundException('Allemant Dev no encontró un usuario registrado con ese email');
     }
     const salt = await bcrypt.genSalt();
     newPassword.password = await bcrypt.hash(newPassword.password, salt);
@@ -266,7 +268,7 @@ export class AuthService {
     const userId = await this.usersService.createUser(createUserDto, true);
     if (!userId) {
       throw new InternalServerErrorException(
-        'Healthy Dev no pudo registrar su usuario en este momento, intentelo nuevamente más tarde',
+        'Allemant Dev no pudo registrar su usuario en este momento, intentelo nuevamente más tarde',
       );
     }
     try {
